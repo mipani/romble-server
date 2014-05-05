@@ -5,12 +5,10 @@ from flask import Flask, g
 dir = os.path.dirname(__file__)
 DATABASE = os.path.join(dir, 'romble-db.db')
 
-class Game:
-	id = None
-	filename = None
-	title = None
-	description = None
-	
+class EntryNotPresentException(Exception):
+	pass
+
+class Game(object):
 	def __init__(self, id=None, filename=None, title=None, description=None):
 		self.id = id
 		self.filename = filename
@@ -40,7 +38,10 @@ class RombleDBHelper:
 		cursor = self.db.cursor()
 		cursor.execute("SELECT * FROM game WHERE id=?", ( id, ) )
 		row = cursor.fetchone()
-		return Game( row[0], row[1], row[2], row[3] )
+		if row is not None:
+			return Game( row[0], row[1], row[2], row[3] )
+		else:
+			raise EntryNotPresentException()
 	
 	def close_connection(self, exception):
 		self.db = getattr(g, '_database', None)

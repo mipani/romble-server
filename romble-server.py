@@ -1,24 +1,39 @@
 #!/usr/bin/env python
 
-from flask import Flask
-from romble_db.RombleDBHelper import RombleDBHelper, Game
+"""
+	romble-server (dev)
+	(c) mipani 2014
+"""
 
+from flask import Flask
+from flask.ext.restful import reqparse, abort, Api, Resource
+from romble_db.RombleDBHelper import RombleDBHelper, Game, EntryNotPresentException
+
+# Basic Setup
 app = Flask(__name__)
+api = Api(app)
 dbHelper = RombleDBHelper(app)
+parser = reqparse.RequestParser()
+parser.add_argument('test', type=int)
 
 @app.before_request
 def setup_db():
 	dbHelper.init_db()
 
-@app.route('/')
-def hello_world():
-    return 'This is the very beginning of the Romble project.'
+class GameEndpoint(Resource):
+	"""
+		Rest Resource for Game
+	"""
+	def get(self, game_id):
+		try:
+			game = dbHelper.get_game_by_id(game_id)
+		except EntryNotPresentException:
+			abort(404, message="Game {} does not exist".format(game_id))
+		
+		return game.__dict__
 
-# Used only for very cursory testing!
-@app.route('/test')
-def test():
-	game = dbHelper.get_game_by_id(1)
-	return str(game.id) + ' ' + game.filename + ' ' + game.title + ' ' + game.description
+api.add_resource(GameEndpoint, '/game/<int:game_id>')
 
+# Remove this line when deploying to Apache!
 if __name__ == '__main__':
     app.run(debug=True)
