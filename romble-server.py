@@ -21,6 +21,10 @@ parser.add_argument('test', type=int)
 def setup_db():
 	dbHelper.init_db()
 
+def encode(obj):
+	return obj.__dict__
+
+
 class GameEndpoint(Resource):
 	"""
 		Rest Resource for Game
@@ -39,8 +43,7 @@ class GameCollectionEndpoint(Resource):
 	"""
 	def get(self):
 		obj = dbHelper.get_all_games()
-		print obj.collection[0].__dict__
-		return json.dumps(obj.__dict__)
+		return json.dumps(obj.__dict__, default=encode)
 
 api.add_resource(GameEndpoint, '/game/<int:game_id>')
 api.add_resource(GameCollectionEndpoint, '/game')
