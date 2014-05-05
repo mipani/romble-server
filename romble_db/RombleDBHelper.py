@@ -15,9 +15,14 @@ class Game(object):
 		self.title = title
 		self.description = description
 
+class JsonCollection(object):
+	def __init__(self, collection=[]):
+		self.collection = collection
+
 class RombleDBHelper:
 	db = None
 	appContext = None
+	cursor = None
 
 	def __init__(self, appContext):
 		self.appContext = appContext
@@ -29,15 +34,23 @@ class RombleDBHelper:
 		self.db = getattr(g, '_database', None)
 		if self.db is None:
 			self.db = g._database = sqlite3.connect(DATABASE)
+			self.cursor = self.db.cursor()
 	
 	def get_game_by_id(self, id):
-		cursor = self.db.cursor()
-		cursor.execute("SELECT * FROM game WHERE id=?", ( id, ) )
-		row = cursor.fetchone()
+		self.cursor.execute("SELECT * FROM game WHERE id=?", ( id, ) )
+		row = self.cursor.fetchone()
 		if row is not None:
 			return Game( row[0], row[1], row[2], row[3] )
 		else:
 			raise EntryNotPresentException()
+	
+	def get_all_games(self):
+		game_list = []
+		rows = self.cursor.execute("SELECT * FROM game")
+		for row in rows:
+			game_list.append(Game(row[0], row[1], row[2], row[3]))
+		
+		return JsonCollection(game_list)
 	
 	def close_connection(self, exception):
 		self.db = getattr(g, '_database', None)
