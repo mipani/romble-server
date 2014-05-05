@@ -24,10 +24,6 @@ class RombleDBHelper:
 		
 		# Decorate with teardown upon instantiation
 		self.close_connection = self.appContext.teardown_appcontext(self.close_connection)
-
-	def test(self):
-		print self.db.cursor()
-		return str(self.db)
 	
 	def init_db(self):
 		self.db = getattr(g, '_database', None)
