@@ -12,7 +12,7 @@ from romble_db.RombleDBHelper import RombleDBHelper, Game, EntryNotPresentExcept
 
 # Basic Setup
 app = Flask(__name__)
-api = Api(app)
+api = Api(app, catch_all_404s=True)
 dbHelper = RombleDBHelper(app)
 parser = reqparse.RequestParser()
 parser.add_argument('test', type=int)
@@ -24,6 +24,8 @@ def setup_db():
 def encode(obj):
 	return obj.__dict__
 
+def handle_error(exception):
+	return { 'server_error': str(exception) }
 
 class GameEndpoint(Resource):
 	"""
@@ -35,6 +37,7 @@ class GameEndpoint(Resource):
 		except EntryNotPresentException:
 			abort(404, message="Game {} does not exist".format(game_id))
 
+		print obj.__dict__
 		return json.dumps(obj.__dict__)
 
 class GameCollectionEndpoint(Resource):
@@ -43,7 +46,8 @@ class GameCollectionEndpoint(Resource):
 	"""
 	def get(self):
 		obj = dbHelper.get_all_games()
-		return json.dumps(obj.__dict__, default=encode)
+		print obj.__dict__
+		return json.dumps(obj.__dict__, ensure_ascii=True, default=encode)
 
 api.add_resource(GameEndpoint, '/game/<int:game_id>')
 api.add_resource(GameCollectionEndpoint, '/game')

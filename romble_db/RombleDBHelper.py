@@ -52,6 +52,16 @@ class RombleDBHelper:
 		
 		return JsonCollection(game_list)
 	
+	"""
+		Query for a game (limit 20, offset 10)
+		
+		@param {Dict} options	List of options to accompany this query
+		May contain: 
+			"field": "all", "rom", "desc", "title"
+	"""
+	def query_games(self, options, query):
+		pass
+	
 	def close_connection(self, exception):
 		self.db = getattr(g, '_database', None)
 		if self.db is not None:
