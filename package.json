@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "express": "~4.13.3",
-    "express-handlebars": "~2.0.1"
+    "express-handlebars": "~2.0.1",
+    "underscore": "~1.8.3"
   }
 }

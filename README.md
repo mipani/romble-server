@@ -15,6 +15,7 @@ The complete Romble platform includes the server side application providing a RE
 * Sequelize
 * MySQL
 * express-handlebars
+* underscore
 
 ## May I contribute?
 It's on Github, ain't it? Simply submit a pull request. Romble is a cool project to add to your resume.
