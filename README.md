@@ -9,6 +9,13 @@ Romble is a content delivery platform for classic video game consoles (such as N
 ## What is Romble made up of?
 The complete Romble platform includes the server side application providing a REST API for storage and delivery of game ROMs (romble-server), Web service providing access to the official Romble Public Domain Repository (romble-web), Client-side PC application to interface with your favourite console (romble-pc), and the various console clients which interface with the rest of the platform (romble-gen, romble-nes, romble-snes, etc).
 
+### Dependencies
+* Node
+* Express
+* Sequelize
+* MySQL
+* express-handlebars
+
 ## May I contribute?
 It's on Github, ain't it? Simply submit a pull request. Romble is a cool project to add to your resume.
 
