@@ -1,0 +1,21 @@
+{
+  "name": "romble-server",
+  "version": "0.0.1-a",
+  "description": "JSON Server for the Romble Content Delivery Platform",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mipani/romble-server.git"
+  },
+  "author": "mipani",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/mipani/romble-server/issues"
+  },
+  "dependencies": {
+    "express": "~4.13.3"
+  }
+}
