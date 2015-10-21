@@ -2,13 +2,39 @@
 
 'use strict';
 
-var express = require( 'express' );
+var Express = require( 'express' );
 var exphbs  = require( 'express-handlebars' );
 var Router = require( './router' );
 
-var app = express();
-app.engine( 'handlebars', exphbs( { defaultLayout: 'main' } ) );
-app.set( 'view engine', 'handlebars' );
+class Application {
 
-var router = new Router( app );
-router.go();
+	/**
+	 * @property	{Express}		expressInstance
+	 * An instance of the Express framework
+	 */
+
+	 /**
+	  * @property	{Router}		router
+	  * An instance of Romble router.
+	  */
+
+	 // Set up an Application instance
+	 constructor() {
+		this.init();
+	 }
+
+	 init() {
+		this.expressInstance = Express();
+
+		this.expressInstance.engine( Application.TEMPLATE_ENGINE, exphbs( { defaultLayout: 'main' } ) );
+		this.expressInstance.set( 'view engine', Application.VIEW_ENGINE );
+
+		this.router = new Router( this.expressInstance );
+		this.router.go();
+	 }
+};
+
+Application.TEMPLATE_ENGINE = 'handlebars';
+Application.VIEW_ENGINE = 'handlebars';
+
+var application = new Application();
