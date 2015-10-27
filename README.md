@@ -16,6 +16,7 @@ The complete Romble platform includes the server side application providing a RE
 * MySQL
 * express-handlebars
 * underscore
+* gm (Also requires that host server have Graphicsmagick installed separately)
 
 ## May I contribute?
 It's on Github, ain't it? Simply submit a pull request. Romble is a cool project to add to your resume.

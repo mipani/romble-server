@@ -18,6 +18,7 @@
   "dependencies": {
     "express": "~4.13.3",
     "express-handlebars": "~2.0.1",
+    "gm": "^1.21.1",
     "mysql": "^2.9.0",
     "sequelize": "^3.12.2",
     "underscore": "~1.8.3"
