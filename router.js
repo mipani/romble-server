@@ -1,6 +1,7 @@
 'use strict';
 
 var _ = require( 'underscore' );
+var TestView = require( './views/testview' );
 
 class Router {
 
@@ -22,7 +23,8 @@ class Router {
 
 	setupRoutes() {
 		this.getRoutes = {
-			'/': this.serveDefaultRoute
+			'/': _.bind( this.serveDefaultRoute, this ),
+			'/test': _.bind( this.serveTestRoute, this )
 		};
 
 		_( this.getRoutes ).each( function( callback, route ) {
@@ -32,6 +34,11 @@ class Router {
 
 	serveDefaultRoute( request, response ) {
 		response.render( 'home' );
+	}
+
+	serveTestRoute( request, response ) {
+		this.testView = this.testView || new TestView();
+		response.send( this.testView.render() );
 	}
 
 	go() {
