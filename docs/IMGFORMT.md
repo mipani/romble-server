@@ -1,8 +1,8 @@
-================================================================================
-File: IMGFORMT.TXT						      						 10/24/2015
+File: IMGFORMT.TXT
+10/24/2015
 Description: Embedded Image Asset File Specification
-Author: mipani								     							1.0
-================================================================================
+Author: mipani
+1.0
 
 # What is the embedded image asset?
 
