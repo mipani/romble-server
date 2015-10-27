@@ -1,8 +1,12 @@
 File: IMGFORMT.TXT
-10/24/2015
+
+Date: 10/24/2015
+
 Description: Embedded Image Asset File Specification
+
 Author: mipani
-1.0
+
+Version: 1.0
 
 # What is the embedded image asset?
 
@@ -38,22 +42,24 @@ and a conformant decoder may ignore them gracefully.
 
 EMHD format is as follows:
 
+```
 typedef struct {
 	uint16_t		width;				Image width
 	uint16_t		height;				Image height
 	uint8_t			bpp;				Image BPP
-										BPP may be 1, 2, 4, 8, 16, or 24.
-										BPP > 8 implies non-indexed color
-	uint8_t			compressType;		image data compression type
-										0 - No compression
-										1 - RLE
-										2 - LZW
-										3 - Huffman
-	uint8_t			hardwarePlatform;	Specifies the hardware format
-										this image data and palette
-										data is stored as.
-										( See below )
+								BPP may be 1, 2, 4, 8, 16, or 24.
+								BPP > 8 implies non-indexed color
+	uint8_t			compressType;			image data compression type
+								0 - No compression
+								1 - RLE
+								2 - LZW
+								3 - Huffman
+	uint8_t			hardwarePlatform;		Specifies the hardware format
+								this image data and palette
+								data is stored as.
+								( See below )
 } EIAHeader;
+```
 
 ### Compression Type
 EIA image data may be compressed in one of three ways: Run-Length Encoding
@@ -85,15 +91,12 @@ A Hardware Platform of 00 means that this EIA file is intended for an
 undocumented platform. All Hardware Platform IDs are reserved; if your
 EIA is for a platform not listed in the table below, you must use type 00.
 
-+-----------------------+
+
 | ID | HardwarePlatform |
-+-----------------------+
+|----|------------------|
 | 00 | Undefined/custom |
-+-----------------------+
-| 01 | EIA Stream		|
-+-----------------------+
+| 01 | EIA Stream	|
 | 02 | Sega Megadrive   |
-+-----------------------+
 
 The selected Hardware Platform also has implications for how your EPAL
 color table is stored (see below).
