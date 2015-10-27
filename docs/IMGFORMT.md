@@ -21,14 +21,14 @@ The file format uses an EA IFF 85 format container, so refer to the EA IFF 85
 standard for additional information on Embedded Image Asset's "chunk" format.
 
 The IFF format of an EIA image is as follows:
-+-----------------------+
-| FORM:EIAx				|		EIAx, where x is the EIA Revision
-+-----------------------+
-| EMHD					|		EMHD EMbedded image asset HeaDer
-| EPLO					|       EPLO Embedded image asset PLatform Options
-| EPAL					|		EPAL EMbedded image asset PALette
-| EIMG					|		EIMG EMbedded IMaGe asset
-+-----------------------+
++-----------------------+---------------------------------------------+
+| FORM:EIAx		| EIAx, where x is the EIA Revision	      |
++-----------------------+---------------------------------------------+
+| EMHD			| EMHD EMbedded image asset HeaDer	      |
+| EPLO			| EPLO Embedded image asset PLatform Options  |
+| EPAL			| EPAL EMbedded image asset PALette           |
+| EIMG			| EIMG EMbedded IMaGe asset		      |
++-----------------------+---------------------------------------------+
 
 Any number of optional AUTH, (c)  , or TEXT chunks may be inserted. These
 may contain metadata about the image in any textual format. What to do with
