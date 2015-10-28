@@ -15,8 +15,11 @@ class SmdEiaFactory {
 
 	/**
 	 * Generates an EIA image and deposits the result in /tmp/<filename>
+	 *
+	 * @param		{String}		imagePath		Pathname to image file
+	 * @param		{String}		result			Filename in ../tmp to deposit in
 	 */
-	generateEIA( image, filename ) {
+	generateEIA( imagePath, result ) {
 
 	}
 };

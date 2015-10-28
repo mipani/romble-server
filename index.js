@@ -5,6 +5,7 @@
 var Express = require( 'express' );
 var exphbs  = require( 'express-handlebars' );
 var Router = require( './router' );
+var Locale = require( './locale/locale' );
 
 class Application {
 
@@ -38,3 +39,5 @@ Application.TEMPLATE_ENGINE = 'handlebars';
 Application.VIEW_ENGINE = 'handlebars';
 
 var application = new Application();
+
+console.log( Locale.getInstance().getString( 'APPLICATION_TITLE' ) + ' OK!' );
