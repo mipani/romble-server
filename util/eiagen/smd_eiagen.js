@@ -9,7 +9,6 @@
 
 var _ = require( 'underscore' );
 var FS = require( 'fs' );
-var GraphicsMagick = require( 'gm' );
 
 class SmdEiaFactory {
 
