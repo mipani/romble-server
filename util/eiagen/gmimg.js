@@ -38,8 +38,18 @@ class ImageWrapper {
 	 * @param	{Number}	height
 	 */
 	resizeImage( width, height ) {
-
+		this.gmImage.resize( width, height );
 	}
+
+	/**
+	 * Quantize the image down to numColors using Floyd-Steinberg dithering.
+	 *
+	 * @param	{Number}	numColors
+	 */
+	quantize( numColors ) {
+		this.gmImage.colors( numColors ).dither( true );
+	}
+
 
 };
 
